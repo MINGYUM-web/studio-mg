@@ -4,7 +4,6 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="theme-color" content="#1D9E75" />
 <title>Studio MG</title>
 <style>
@@ -24,16 +23,14 @@
   .screen{display:none;flex-direction:column;min-height:100vh;}
   .screen.active{display:flex;}
 
-  /* top bar */
   .top-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 16px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:10;}
   .top-bar h2{font-size:17px;font-weight:700;color:var(--t1);}
   .icon-btn{background:none;border:none;cursor:pointer;padding:4px 6px;font-size:22px;color:var(--t1);line-height:1;display:flex;align-items:center;}
   .ml-auto{margin-left:auto;}
 
-  /* login */
   #screen-login{padding:0 24px 40px;justify-content:center;background:var(--surface);}
   .login-logo{text-align:center;margin:60px 0 40px;}
-  .logo-circle{width:76px;height:76px;border-radius:22px;background:var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:38px;}
+  .logo-circle{width:76px;height:76px;border-radius:22px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:38px;}
   .login-logo h1{font-size:26px;font-weight:800;color:var(--t1);letter-spacing:-0.5px;}
   .login-logo p{font-size:14px;color:var(--t2);margin-top:4px;}
   .field-label{font-size:13px;font-weight:600;color:var(--t2);margin-bottom:8px;display:block;}
@@ -46,17 +43,15 @@
   .ok{font-size:13px;color:var(--green-dark);text-align:center;margin-top:8px;min-height:20px;}
   .ghost-link{display:block;text-align:center;margin-top:28px;background:none;border:none;font-size:13px;color:var(--t3);cursor:pointer;padding:4px;}
 
-  /* change pin */
   #screen-change-pin{background:var(--surface);}
   .form-body{flex:1;padding:32px 24px 40px;display:flex;flex-direction:column;justify-content:center;}
   .form-body h2{font-size:20px;font-weight:800;color:var(--t1);margin-bottom:6px;}
   .form-body p{font-size:14px;color:var(--t2);margin-bottom:28px;line-height:1.6;}
   .field-group{margin-bottom:16px;}
 
-  /* practice */
   #screen-practice{background:var(--bg);}
   .prac-header{background:var(--surface);padding:16px;border-bottom:1px solid var(--border);}
-  .student-row{display:flex;align-items:center;gap:12px;}
+  .student-row-h{display:flex;align-items:center;gap:12px;}
   .avatar{border-radius:50%;background:var(--green-bg);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--green-dark);flex-shrink:0;}
   .sname{font-size:16px;font-weight:700;color:var(--t1);}
   .sbadge{margin-left:auto;font-size:12px;padding:4px 10px;border-radius:20px;font-weight:700;}
@@ -83,15 +78,12 @@
   .rec-actions{display:flex;gap:8px;}
   .play-btn{flex:1;padding:9px 12px;background:#fff;border:1px solid #A8D9C8;border-radius:var(--r-sm);font-size:13px;font-weight:700;color:var(--green-dark);cursor:pointer;}
   .dl-btn{flex:1;padding:9px 12px;background:var(--green);border:none;border-radius:var(--r-sm);font-size:13px;font-weight:700;color:#fff;cursor:pointer;}
-  .dl-btn.done{background:var(--green-dark);opacity:0.7;cursor:default;}
+  .dl-btn.dl-done{background:#888;cursor:default;}
   audio{width:100%;margin-top:8px;height:36px;display:none;}
   .mic-note{font-size:12px;color:var(--t3);text-align:center;padding:6px 16px 0;}
-  .dl-warn{font-size:13px;color:var(--red-dark);background:var(--red-bg);border-radius:var(--r-md);padding:12px 14px;margin:10px 16px 0;text-align:center;display:none;font-weight:600;line-height:1.5;}
+  .dl-warn{font-size:13px;color:var(--red-dark);background:var(--red-bg);border-radius:var(--r-md);padding:12px 14px;margin:10px 16px 0;text-align:center;display:none;font-weight:600;line-height:1.6;}
 
-  /* instr login */
   #screen-instr-login{padding:0 24px 40px;justify-content:center;background:var(--surface);}
-
-  /* dashboard */
   #screen-instructor{background:var(--bg);}
   .tab-row{display:flex;gap:8px;padding:12px 16px 0;}
   .tab-btn{flex:1;padding:10px;border-radius:var(--r-md);font-size:14px;font-weight:700;cursor:pointer;border:1.5px solid var(--border);background:var(--bg);color:var(--t2);}
@@ -104,7 +96,6 @@
   .stat-lbl{font-size:11px;color:var(--t3);margin-bottom:4px;font-weight:600;}
   .stat-val{font-size:20px;font-weight:800;color:var(--t1);}
 
-  /* settings */
   #screen-settings{background:var(--bg);}
   .set-card{background:var(--surface);margin:12px 16px;border-radius:var(--r-lg);border:1px solid var(--border);padding:16px;}
   .set-card h3{font-size:12px;font-weight:800;color:var(--t3);margin-bottom:14px;text-transform:uppercase;letter-spacing:0.5px;}
@@ -125,16 +116,15 @@
   .set-ok{font-size:13px;color:var(--green-dark);margin-top:8px;min-height:18px;font-weight:600;}
   .code-row{display:flex;gap:8px;align-items:center;}
   .code-inp{flex:1;padding:10px 12px;font-size:15px;border:1.5px solid var(--border);border-radius:var(--r-sm);background:var(--bg);color:var(--t1);letter-spacing:4px;text-align:center;outline:none;}
-  .code-inp:focus{border-color:var(--green);}
 </style>
 </head>
 <body>
 <div class="app">
 
-<!-- ① 홈 -->
+<!-- 홈 -->
 <div id="screen-login" class="screen active">
   <div class="login-logo">
-    <div class="logo-circle">🎤</div>
+    <div class="logo-circle" style="background:var(--green);">🎤</div>
     <h1>Studio MG</h1>
     <p>보컬 연습 트래커</p>
   </div>
@@ -146,7 +136,7 @@
   <button class="ghost-link" onclick="nav('screen-instr-login')">강사 모드 →</button>
 </div>
 
-<!-- ② 비밀번호 변경 -->
+<!-- 비밀번호 변경 -->
 <div id="screen-change-pin" class="screen">
   <div class="top-bar">
     <button class="icon-btn" onclick="back()">◀</button>
@@ -173,10 +163,10 @@
   </div>
 </div>
 
-<!-- ③ 연습 -->
+<!-- 연습 -->
 <div id="screen-practice" class="screen">
   <div class="prac-header">
-    <div class="student-row">
+    <div class="student-row-h">
       <div class="avatar" id="prac-av" style="width:42px;height:42px;font-size:14px;">MG</div>
       <div><div class="sname" id="prac-name">이름</div></div>
       <span class="sbadge badge-idle" id="sbadge">대기 중</span>
@@ -197,7 +187,7 @@
   <button class="big-btn big-red" id="end-btn" disabled onclick="endPractice()" style="margin-top:12px;margin-bottom:32px;">연습 종료</button>
 </div>
 
-<!-- ④ 강사 로그인 -->
+<!-- 강사 로그인 -->
 <div id="screen-instr-login" class="screen">
   <div style="text-align:center;margin:60px 0 40px;">
     <div class="logo-circle" style="background:var(--purple);margin:0 auto 14px;">🔒</div>
@@ -213,12 +203,12 @@
   </div>
 </div>
 
-<!-- ⑤ 강사 대시보드 -->
+<!-- 강사 대시보드 -->
 <div id="screen-instructor" class="screen">
   <div class="top-bar">
     <button class="icon-btn" onclick="back()">◀</button>
     <h2>강사 대시보드</h2>
-    <button class="icon-btn ml-auto" onclick="nav('screen-settings')" title="설정">⚙️</button>
+    <button class="icon-btn ml-auto" onclick="nav('screen-settings')">⚙️</button>
   </div>
   <div class="tab-row">
     <button class="tab-btn active" id="tab-today" onclick="switchTab('today')">오늘</button>
@@ -227,7 +217,7 @@
   <div class="dash-list" id="dash-list"></div>
 </div>
 
-<!-- ⑥ 설정 -->
+<!-- 설정 -->
 <div id="screen-settings" class="screen">
   <div class="top-bar">
     <button class="icon-btn" onclick="back()">◀</button>
@@ -257,34 +247,34 @@
   </div>
 </div>
 
-</div><!-- /app -->
-
+</div>
 <script>
 /* ── DB ── */
-const SK = 'studiomg_v1';
-function loadDB(){ try{ const r=localStorage.getItem(SK); if(r) return JSON.parse(r); }catch(e){} return {instrPin:'1234',students:{}}; }
-function saveDB(){ try{ localStorage.setItem(SK,JSON.stringify(DB)); }catch(e){} }
-const DB = loadDB();
+const SK='studiomg_v1';
+function loadDB(){try{const r=localStorage.getItem(SK);if(r)return JSON.parse(r);}catch(e){}return{instrPin:'1234',students:{}};}
+function saveDB(){try{localStorage.setItem(SK,JSON.stringify(DB));}catch(e){}}
+const DB=loadDB();
 
 /* ── 네비게이션 ── */
-let stack = ['screen-login'];
-function show(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); window.scrollTo(0,0); }
-function nav(id){ show(id); stack.push(id); history.pushState({s:id},''); if(id==='screen-settings') renderStudentRows(); }
-function back(){ if(stack.length>1) stack.pop(); const p=stack[stack.length-1]||'screen-login'; show(p); history.pushState({s:p},''); }
-window.addEventListener('popstate',()=>{ if(stack.length>1) stack.pop(); show(stack[stack.length-1]||'screen-login'); });
+let stack=['screen-login'];
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
+function nav(id){show(id);stack.push(id);history.pushState({s:id},'');if(id==='screen-settings')renderStudentRows();}
+function back(){if(stack.length>1)stack.pop();const p=stack[stack.length-1]||'screen-login';show(p);history.pushState({s:p},'');}
+window.addEventListener('popstate',()=>{if(stack.length>1)stack.pop();show(stack[stack.length-1]||'screen-login');});
 history.pushState({s:'screen-login'},'');
 
 /* ── 상태 ── */
-let cur=null, practicing=false, timerIv=null, secs=0, recCount=0;
-let mediaRec=null, chunks=[], blobs=[];
-// blobs: [{blob,url,name,downloaded}]
+let cur=null,practicing=false,timerIv=null,secs=0,recCount=0;
+let mediaRec=null,chunks=[];
+// blobs[i] = {blob, url, name, downloaded, ready}
+let blobs=[];
 
 /* ── 홈 ── */
-function onStudentPin(){ document.getElementById('student-login-btn').disabled=!document.getElementById('student-pin').value.length; document.getElementById('student-err').textContent=''; }
+function onStudentPin(){document.getElementById('student-login-btn').disabled=!document.getElementById('student-pin').value.length;document.getElementById('student-err').textContent='';}
 function studentLogin(){
   const pin=document.getElementById('student-pin').value;
   const found=Object.entries(DB.students).find(([,d])=>d.pin===pin);
-  if(!found){ document.getElementById('student-err').textContent='비밀번호가 맞지 않아요.'; document.getElementById('student-pin').value=''; document.getElementById('student-login-btn').disabled=true; return; }
+  if(!found){document.getElementById('student-err').textContent='비밀번호가 맞지 않아요.';document.getElementById('student-pin').value='';document.getElementById('student-login-btn').disabled=true;return;}
   cur={name:found[0],...found[1]};
   initPractice();
   document.getElementById('student-pin').value='';
@@ -294,17 +284,17 @@ function studentLogin(){
 
 /* ── 비번 변경 ── */
 function onChangePinInput(){
-  const a=document.getElementById('cur-pin').value, b=document.getElementById('new-pin').value, c=document.getElementById('new-pin2').value;
+  const a=document.getElementById('cur-pin').value,b=document.getElementById('new-pin').value,c=document.getElementById('new-pin2').value;
   document.getElementById('change-pin-btn').disabled=!(a&&b&&c);
-  document.getElementById('change-pin-err').textContent=''; document.getElementById('change-pin-ok').textContent='';
+  document.getElementById('change-pin-err').textContent='';document.getElementById('change-pin-ok').textContent='';
 }
 function submitChangePin(){
-  const cur2=document.getElementById('cur-pin').value, n1=document.getElementById('new-pin').value, n2=document.getElementById('new-pin2').value;
-  const found=Object.entries(DB.students).find(([,d])=>d.pin===cur2);
+  const c=document.getElementById('cur-pin').value,n1=document.getElementById('new-pin').value,n2=document.getElementById('new-pin2').value;
+  const found=Object.entries(DB.students).find(([,d])=>d.pin===c);
   if(!found){document.getElementById('change-pin-err').textContent='현재 비밀번호가 맞지 않아요.';return;}
   if(n1!==n2){document.getElementById('change-pin-err').textContent='새 비밀번호가 서로 달라요.';return;}
-  if(n1===cur2){document.getElementById('change-pin-err').textContent='현재 비밀번호와 같은 번호예요.';return;}
-  DB.students[found[0]].pin=n1; saveDB();
+  if(n1===c){document.getElementById('change-pin-err').textContent='현재 비밀번호와 같은 번호예요.';return;}
+  DB.students[found[0]].pin=n1;saveDB();
   ['cur-pin','new-pin','new-pin2'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('change-pin-btn').disabled=true;
   document.getElementById('change-pin-ok').textContent='비밀번호가 변경됐어요 ✓';
@@ -313,8 +303,8 @@ function submitChangePin(){
 
 /* ── 연습 초기화 ── */
 function initPractice(){
-  secs=0; recCount=0; blobs=[];
-  if(timerIv) clearInterval(timerIv);
+  secs=0;recCount=0;blobs=[];
+  if(timerIv)clearInterval(timerIv);
   document.getElementById('prac-av').textContent=cur.initials;
   document.getElementById('prac-name').textContent=cur.name;
   document.getElementById('timer').textContent='00:00:00';
@@ -332,7 +322,7 @@ function initPractice(){
   document.getElementById('rec-lbl').textContent='녹음 시작';
   document.getElementById('mic-note').textContent='';
   document.getElementById('dl-warn').style.display='none';
-  practicing=false; mediaRec=null;
+  practicing=false;mediaRec=null;
 }
 
 /* ── 시작/일시정지 ── */
@@ -341,19 +331,19 @@ function togglePractice(){
     practicing=true;
     timerIv=setInterval(()=>{
       secs++;
-      const h=String(Math.floor(secs/3600)).padStart(2,'0');
-      const m=String(Math.floor((secs%3600)/60)).padStart(2,'0');
-      const s=String(secs%60).padStart(2,'0');
-      document.getElementById('timer').textContent=`${h}:${m}:${s}`;
+      document.getElementById('timer').textContent=
+        String(Math.floor(secs/3600)).padStart(2,'0')+':'+
+        String(Math.floor((secs%3600)/60)).padStart(2,'0')+':'+
+        String(secs%60).padStart(2,'0');
     },1000);
     document.getElementById('timer').classList.add('running');
     document.getElementById('sbadge').textContent='연습 중';
     document.getElementById('sbadge').className='sbadge badge-on';
     document.getElementById('start-btn').className='big-btn big-pause';
     document.getElementById('start-btn').textContent='⏸ 일시정지';
-    if(recCount<3) document.getElementById('rec-btn').disabled=false;
-  } else {
-    practicing=false; clearInterval(timerIv);
+    if(recCount<3)document.getElementById('rec-btn').disabled=false;
+  }else{
+    practicing=false;clearInterval(timerIv);
     document.getElementById('timer').classList.remove('running');
     document.getElementById('sbadge').textContent='일시정지';
     document.getElementById('sbadge').className='sbadge badge-idle';
@@ -368,46 +358,50 @@ async function toggleRecord(){
   const btn=document.getElementById('rec-btn');
   if(!mediaRec||mediaRec.state==='inactive'){
     try{
-      const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+      const stream=await navigator.mediaDevices.getUserMedia({audio:true,video:false});
       chunks=[];
       let mime='';
-      if(MediaRecorder.isTypeSupported('audio/webm;codecs=opus')) mime='audio/webm;codecs=opus';
-      else if(MediaRecorder.isTypeSupported('audio/webm')) mime='audio/webm';
-      else if(MediaRecorder.isTypeSupported('audio/mp4')) mime='audio/mp4';
-      mediaRec = mime ? new MediaRecorder(stream,{mimeType:mime}) : new MediaRecorder(stream);
-      mediaRec.ondataavailable=e=>{ if(e.data&&e.data.size>0) chunks.push(e.data); };
+      ['audio/webm;codecs=opus','audio/webm','audio/ogg','audio/mp4'].forEach(m=>{
+        if(!mime&&MediaRecorder.isTypeSupported(m))mime=m;
+      });
+      mediaRec=mime?new MediaRecorder(stream,{mimeType:mime}):new MediaRecorder(stream);
+      mediaRec.ondataavailable=e=>{if(e.data&&e.data.size>0)chunks.push(e.data);};
       mediaRec.onstop=()=>{
         const usedMime=mediaRec.mimeType||'audio/webm';
         const blob=new Blob(chunks,{type:usedMime});
         const url=URL.createObjectURL(blob);
-        const ext=usedMime.includes('mp4')?'m4a':'webm';
+        let ext='webm';
+        if(usedMime.includes('mp4'))ext='mp4';
+        else if(usedMime.includes('ogg'))ext='ogg';
         const today=new Date().toISOString().slice(0,10);
         const fname=`${cur.name}_연습녹음${recCount}_${today}.${ext}`;
-        blobs.push({blob,url,name:fname,downloaded:false});
+        const idx=blobs.length;
+        blobs.push({blob,url,name:fname,downloaded:false,ready:true});
         stream.getTracks().forEach(t=>t.stop());
-        addRecItem(recCount,url,fname,blobs.length-1);
+        addRecItem(recCount,url,fname,idx);
         document.getElementById('mic-note').textContent='';
       };
-      mediaRec.start(100);
+      mediaRec.start(200);
       btn.className='rec-btn recording';
       document.getElementById('rec-lbl').textContent='녹음 중 ● (완료하려면 다시 누르기)';
       document.getElementById('mic-note').textContent='🎙 마이크가 활성화되어 있어요';
-    } catch(e){
+    }catch(e){
       document.getElementById('mic-note').textContent='마이크 권한이 필요해요. 브라우저에서 허용해주세요.';
     }
-  } else if(mediaRec.state==='recording'){
+  }else if(mediaRec.state==='recording'){
     recCount++;
-    mediaRec.stop(); mediaRec=null;
+    mediaRec.stop();
+    mediaRec=null;
     btn.className='rec-btn';
     document.getElementById('rec-lbl').textContent=recCount>=3?'녹음 완료 ✓':'녹음 시작';
     const cnt=document.getElementById('rec-cnt');
     cnt.textContent=`${recCount} / 3`;
-    if(recCount>=3){ cnt.classList.add('done'); btn.disabled=true; document.getElementById('end-btn').disabled=false; }
+    if(recCount>=3){cnt.classList.add('done');btn.disabled=true;document.getElementById('end-btn').disabled=false;}
   }
 }
 
 function addRecItem(num,url,fname,idx){
-  const li=document.createElement('div'); li.className='rec-item';
+  const li=document.createElement('div');li.className='rec-item';
   li.innerHTML=`
     <div class="rec-item-top">✅ 연습 녹음 ${num}</div>
     <div class="rec-actions">
@@ -417,50 +411,67 @@ function addRecItem(num,url,fname,idx){
     <audio id="au-${num}" src="${url}" onended="resetPb(${num})"></audio>`;
   document.getElementById('rec-list').appendChild(li);
 }
+
 function togglePlay(n){
-  const au=document.getElementById('au-'+n), pb=document.getElementById('pb-'+n);
+  const au=document.getElementById('au-'+n),pb=document.getElementById('pb-'+n);
   if(au.paused){
     document.querySelectorAll('audio').forEach(a=>{a.pause();a.currentTime=0;});
     document.querySelectorAll('[id^="pb-"]').forEach(b=>b.textContent='▶ 재생');
-    au.play(); pb.textContent='⏸ 정지';
-  } else { au.pause(); au.currentTime=0; pb.textContent='▶ 재생'; }
+    au.play();pb.textContent='⏸ 정지';
+  }else{au.pause();au.currentTime=0;pb.textContent='▶ 재생';}
 }
-function resetPb(n){ const b=document.getElementById('pb-'+n); if(b) b.textContent='▶ 재생'; }
+function resetPb(n){const b=document.getElementById('pb-'+n);if(b)b.textContent='▶ 재생';}
 
-/* ── 다운로드 (iOS/Android 대응) ── */
+/* ── 다운로드 ── */
 function doDownload(idx,num){
-  const rec=blobs[idx]; if(!rec) return;
-  // Blob → base64 data URL 방식 (iOS Safari에서 가장 안정적)
+  const rec=blobs[idx];
+  if(!rec||!rec.ready){
+    alert('녹음 파일이 아직 준비되지 않았어요. 잠시 후 다시 시도해주세요.');
+    return;
+  }
+  // FileReader로 base64 변환 → <a> 클릭 (크롬/안드로이드/iOS 모두 호환)
   const reader=new FileReader();
-  reader.onload=function(e){
+  reader.onloadend=function(){
     const a=document.createElement('a');
-    a.href=e.target.result;
+    a.href=reader.result;
     a.download=rec.name;
+    a.style.display='none';
     document.body.appendChild(a);
     a.click();
-    setTimeout(()=>document.body.removeChild(a),500);
+    setTimeout(()=>{document.body.removeChild(a);},1000);
   };
   reader.readAsDataURL(rec.blob);
 
+  // 다운로드 완료 표시
   rec.downloaded=true;
   const db=document.getElementById('db-'+num);
-  if(db){ db.textContent='✓ 완료'; db.classList.add('done'); db.disabled=true; }
-  // 경고 숨기기
-  if(blobs.length>0 && blobs.every(r=>r.downloaded)){
+  if(db){db.textContent='✓ 완료';db.classList.add('dl-done');db.disabled=true;}
+
+  // 경고 숨기기 (전부 완료됐으면)
+  if(recCount===3&&blobs.length===3&&blobs.every(r=>r.downloaded)){
     document.getElementById('dl-warn').style.display='none';
   }
 }
 
 /* ── 연습 종료 ── */
 function endPractice(){
-  const notDl=blobs.filter(r=>!r.downloaded);
-  if(notDl.length>0){
-    const w=document.getElementById('dl-warn');
-    w.style.display='block';
-    w.textContent=`⚠️ 녹음 파일 ${notDl.length}개를 아직 다운로드하지 않았어요.\n다운로드 버튼을 눌러 파일을 저장한 후 종료해주세요!`;
-    w.scrollIntoView({behavior:'smooth',block:'center'});
+  // 녹음이 3개 완료됐는지 먼저 확인
+  if(recCount<3){
+    showWarn('녹음을 3회 완료해야 종료할 수 있어요!');
     return;
   }
+  // blobs가 3개 다 ready인지 확인 (onstop 아직 안 끝난 경우)
+  if(blobs.length<3||blobs.some(r=>!r.ready)){
+    showWarn('녹음 파일이 아직 처리 중이에요. 잠시 후 다시 눌러주세요.');
+    return;
+  }
+  // 다운로드 안 된 파일 확인
+  const notDl=blobs.filter(r=>!r.downloaded);
+  if(notDl.length>0){
+    showWarn(`⚠️ 녹음 파일 ${notDl.length}개를 아직 다운로드하지 않았어요.\n각 녹음의 ⬇ 다운로드 버튼을 눌러 파일을 저장해주세요!`);
+    return;
+  }
+  // 모두 완료 → 기록 저장 후 홈으로
   clearInterval(timerIv);
   const h=String(Math.floor(secs/3600)).padStart(2,'0');
   const m=String(Math.floor((secs%3600)/60)).padStart(2,'0');
@@ -471,17 +482,24 @@ function endPractice(){
     DB.students[cur.name].sessions.unshift({date:today,duration,recs:recCount});
     saveDB();
   }
-  stack=['screen-login']; show('screen-login');
+  stack=['screen-login'];show('screen-login');
   history.pushState({s:'screen-login'},'');
 }
 
+function showWarn(msg){
+  const w=document.getElementById('dl-warn');
+  w.style.display='block';
+  w.textContent=msg;
+  w.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
 /* ── 강사 로그인 ── */
-function onInstrPin(){ document.getElementById('instr-login-btn').disabled=!document.getElementById('instr-pin').value.length; document.getElementById('instr-err').textContent=''; }
+function onInstrPin(){document.getElementById('instr-login-btn').disabled=!document.getElementById('instr-pin').value.length;document.getElementById('instr-err').textContent='';}
 function instrLogin(){
   const pin=document.getElementById('instr-pin').value;
-  if(pin!==DB.instrPin){ document.getElementById('instr-err').textContent='코드가 맞지 않아요.'; document.getElementById('instr-pin').value=''; document.getElementById('instr-login-btn').disabled=true; return; }
-  document.getElementById('instr-pin').value=''; document.getElementById('instr-login-btn').disabled=true;
-  renderDash('today'); nav('screen-instructor');
+  if(pin!==DB.instrPin){document.getElementById('instr-err').textContent='코드가 맞지 않아요.';document.getElementById('instr-pin').value='';document.getElementById('instr-login-btn').disabled=true;return;}
+  document.getElementById('instr-pin').value='';document.getElementById('instr-login-btn').disabled=true;
+  renderDash('today');nav('screen-instructor');
 }
 
 /* ── 대시보드 ── */
@@ -492,18 +510,18 @@ function switchTab(t){
 }
 function renderDash(tab){
   const today=new Date().toISOString().slice(0,10);
-  const list=document.getElementById('dash-list'); list.innerHTML='';
+  const list=document.getElementById('dash-list');list.innerHTML='';
   const entries=Object.entries(DB.students);
-  if(!entries.length){ list.innerHTML='<div style="padding:32px 0;text-align:center;font-size:14px;color:var(--t3);">등록된 학생이 없어요<br><small>설정에서 학생을 추가해주세요</small></div>'; return; }
+  if(!entries.length){list.innerHTML='<div style="padding:32px 0;text-align:center;font-size:14px;color:var(--t3);">등록된 학생이 없어요<br><small>설정에서 학생을 추가해주세요</small></div>';return;}
   entries.forEach(([name,data])=>{
     const sessions=tab==='today'?data.sessions.filter(s=>s.date===today):data.sessions;
     if(!sessions.length){
-      const c=document.createElement('div'); c.className='d-card';
+      const c=document.createElement('div');c.className='d-card';
       c.innerHTML=`<div class="d-head"><div class="avatar" style="width:36px;height:36px;font-size:12px;">${data.initials}</div><div><div class="sname">${name}</div></div></div><p style="font-size:13px;color:var(--t3);">${tab==='today'?'오늘 연습 기록 없음':'기록 없음'}</p>`;
-      list.appendChild(c); return;
+      list.appendChild(c);return;
     }
     sessions.forEach(sess=>{
-      const c=document.createElement('div'); c.className='d-card';
+      const c=document.createElement('div');c.className='d-card';
       c.innerHTML=`<div class="d-head"><div class="avatar" style="width:36px;height:36px;font-size:12px;">${data.initials}</div><div><div class="sname">${name}</div><div style="font-size:11px;color:var(--t3);margin-top:2px;">${sess.date}</div></div></div><div class="d-stats"><div class="stat-box"><div class="stat-lbl">연습 시간</div><div class="stat-val">${sess.duration}</div></div><div class="stat-box"><div class="stat-lbl">녹음</div><div class="stat-val">${sess.recs}회</div></div></div>`;
       list.appendChild(c);
     });
@@ -511,25 +529,25 @@ function renderDash(tab){
 }
 
 /* ── 설정 ── */
-function getInitials(name){ return name.length>=3?name.slice(1):name.slice(-2); }
+function getInitials(name){return name.length>=3?name.slice(1):name.slice(-2);}
 function renderStudentRows(){
-  const c=document.getElementById('student-rows'); c.innerHTML='';
+  const c=document.getElementById('student-rows');c.innerHTML='';
   const entries=Object.entries(DB.students);
-  if(!entries.length){ c.innerHTML='<p style="font-size:13px;color:var(--t3);padding:4px 0 10px;">등록된 학생 없음</p>'; return; }
+  if(!entries.length){c.innerHTML='<p style="font-size:13px;color:var(--t3);padding:4px 0 10px;">등록된 학생 없음</p>';return;}
   entries.forEach(([name,data])=>{
-    const row=document.createElement('div'); row.className='s-row';
+    const row=document.createElement('div');row.className='s-row';
     row.innerHTML=`<div class="s-info"><div class="avatar" style="width:32px;height:32px;font-size:11px;">${data.initials}</div><div class="s-name">${name}</div></div><input class="s-pin-inp" type="number" placeholder="새 PIN" id="rpin-${name}"/><button class="s-save" onclick="saveStudentPin('${name}')">저장</button><button class="s-del" onclick="delStudent('${name}')">🗑</button>`;
     c.appendChild(row);
   });
 }
 function saveStudentPin(name){
-  const inp=document.getElementById('rpin-'+name); const v=inp.value.trim(); if(!v) return;
-  DB.students[name].pin=v; saveDB(); inp.value='';
+  const inp=document.getElementById('rpin-'+name);const v=inp.value.trim();if(!v)return;
+  DB.students[name].pin=v;saveDB();inp.value='';
   showOk('student-ok',`${name} 비밀번호 초기화됨 ✓`);
 }
 function delStudent(name){
-  if(!confirm(`${name} 학생을 삭제할까요?\n연습 기록도 모두 사라져요.`)) return;
-  delete DB.students[name]; saveDB(); renderStudentRows();
+  if(!confirm(`${name} 학생을 삭제할까요?\n연습 기록도 모두 사라져요.`))return;
+  delete DB.students[name];saveDB();renderStudentRows();
   showOk('student-ok',`${name} 삭제됨`);
 }
 function onAddInput(){
@@ -537,18 +555,18 @@ function onAddInput(){
   document.getElementById('add-err').textContent='';
 }
 function addStudent(){
-  const name=document.getElementById('add-name').value.trim(), pin=document.getElementById('add-pin').value.trim();
+  const name=document.getElementById('add-name').value.trim(),pin=document.getElementById('add-pin').value.trim();
   if(DB.students[name]){document.getElementById('add-err').textContent='이미 같은 이름의 학생이 있어요.';return;}
-  DB.students[name]={initials:getInitials(name),pin,sessions:[]}; saveDB();
-  document.getElementById('add-name').value=''; document.getElementById('add-pin').value=''; document.getElementById('add-btn').disabled=true;
-  renderStudentRows(); showOk('student-ok',`${name} 추가됨 ✓`);
+  DB.students[name]={initials:getInitials(name),pin,sessions:[]};saveDB();
+  document.getElementById('add-name').value='';document.getElementById('add-pin').value='';document.getElementById('add-btn').disabled=true;
+  renderStudentRows();showOk('student-ok',`${name} 추가됨 ✓`);
 }
 function saveInstrPin(){
-  const v=document.getElementById('new-instr-pin').value.trim(); if(!v) return;
-  DB.instrPin=v; saveDB(); document.getElementById('new-instr-pin').value='';
+  const v=document.getElementById('new-instr-pin').value.trim();if(!v)return;
+  DB.instrPin=v;saveDB();document.getElementById('new-instr-pin').value='';
   showOk('instr-ok','강사 코드 저장됨 ✓');
 }
-function showOk(id,msg){ const el=document.getElementById(id); el.textContent=msg; setTimeout(()=>el.textContent='',2500); }
+function showOk(id,msg){const el=document.getElementById(id);el.textContent=msg;setTimeout(()=>el.textContent='',2500);}
 </script>
 </body>
 </html>
