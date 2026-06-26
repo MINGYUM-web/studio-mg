@@ -8,13 +8,13 @@
 <title>Studio MG</title>
 <style>
   :root {
-    --green:#1D9E75; --green-dark:#0F6E56; --green-bg:#E1F5EE;
-    --red:#E24B4A; --red-dark:#A32D2D; --red-bg:#FCEBEB;
+    --green:#1D9E75;--green-dark:#0F6E56;--green-bg:#E1F5EE;
+    --red:#E24B4A;--red-dark:#A32D2D;--red-bg:#FCEBEB;
     --purple:#534AB7;
-    --bg:#F2F2F7; --surface:#FFFFFF;
-    --border:#DEDEDE; --border-light:#F0F0F0;
-    --t1:#111111; --t2:#444444; --t3:#888888;
-    --r-sm:8px; --r-md:12px; --r-lg:16px;
+    --bg:#F2F2F7;--surface:#FFFFFF;
+    --border:#DEDEDE;--border-light:#F0F0F0;
+    --t1:#111111;--t2:#444444;--t3:#888888;
+    --r-sm:8px;--r-md:12px;--r-lg:16px;
     --font:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -22,12 +22,10 @@
   .app{max-width:430px;margin:0 auto;min-height:100vh;background:var(--bg);}
   .screen{display:none;flex-direction:column;min-height:100vh;}
   .screen.active{display:flex;}
-
   .top-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 16px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:10;}
   .top-bar h2{font-size:17px;font-weight:700;color:var(--t1);}
   .icon-btn{background:none;border:none;cursor:pointer;padding:4px 6px;font-size:22px;color:var(--t1);line-height:1;display:flex;align-items:center;}
   .ml-auto{margin-left:auto;}
-
   #screen-login{padding:0 24px 40px;justify-content:center;background:var(--surface);}
   .login-logo{text-align:center;margin:60px 0 40px;}
   .logo-circle{width:76px;height:76px;border-radius:22px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:38px;}
@@ -42,13 +40,11 @@
   .err{font-size:13px;color:var(--red-dark);text-align:center;margin-top:8px;min-height:20px;}
   .ok{font-size:13px;color:var(--green-dark);text-align:center;margin-top:8px;min-height:20px;}
   .ghost-link{display:block;text-align:center;margin-top:28px;background:none;border:none;font-size:13px;color:var(--t3);cursor:pointer;padding:4px;}
-
   #screen-change-pin{background:var(--surface);}
   .form-body{flex:1;padding:32px 24px 40px;display:flex;flex-direction:column;justify-content:center;}
   .form-body h2{font-size:20px;font-weight:800;color:var(--t1);margin-bottom:6px;}
   .form-body p{font-size:14px;color:var(--t2);margin-bottom:28px;line-height:1.6;}
   .field-group{margin-bottom:16px;}
-
   #screen-practice{background:var(--bg);}
   .prac-header{background:var(--surface);padding:16px;border-bottom:1px solid var(--border);}
   .student-row-h{display:flex;align-items:center;gap:12px;}
@@ -79,10 +75,9 @@
   .play-btn{flex:1;padding:9px 12px;background:#fff;border:1px solid #A8D9C8;border-radius:var(--r-sm);font-size:13px;font-weight:700;color:var(--green-dark);cursor:pointer;}
   .dl-btn{flex:1;padding:9px 12px;background:var(--green);border:none;border-radius:var(--r-sm);font-size:13px;font-weight:700;color:#fff;cursor:pointer;}
   .dl-btn.dl-done{background:#888;cursor:default;}
-  audio{width:100%;margin-top:8px;height:36px;display:none;}
+  audio{width:100%;margin-top:8px;height:36px;}
   .mic-note{font-size:12px;color:var(--t3);text-align:center;padding:6px 16px 0;}
   .dl-warn{font-size:13px;color:var(--red-dark);background:var(--red-bg);border-radius:var(--r-md);padding:12px 14px;margin:10px 16px 0;text-align:center;display:none;font-weight:600;line-height:1.6;}
-
   #screen-instr-login{padding:0 24px 40px;justify-content:center;background:var(--surface);}
   #screen-instructor{background:var(--bg);}
   .tab-row{display:flex;gap:8px;padding:12px 16px 0;}
@@ -95,7 +90,6 @@
   .stat-box{background:var(--bg);border-radius:var(--r-md);padding:12px;}
   .stat-lbl{font-size:11px;color:var(--t3);margin-bottom:4px;font-weight:600;}
   .stat-val{font-size:20px;font-weight:800;color:var(--t1);}
-
   #screen-settings{background:var(--bg);}
   .set-card{background:var(--surface);margin:12px 16px;border-radius:var(--r-lg);border:1px solid var(--border);padding:16px;}
   .set-card h3{font-size:12px;font-weight:800;color:var(--t3);margin-bottom:14px;text-transform:uppercase;letter-spacing:0.5px;}
@@ -265,8 +259,12 @@ history.pushState({s:'screen-login'},'');
 
 /* ── 상태 ── */
 let cur=null,practicing=false,timerIv=null,secs=0,recCount=0;
-let mediaRec=null,chunks=[];
-// blobs[i] = {blob, url, name, downloaded, ready}
+// 녹음 관련 — mediaRec을 null로 초기화하지 않고 상태로만 관리
+let isRecording=false;
+let currentStream=null;
+let currentMediaRec=null;
+let currentChunks=[];
+// blobs[i] = {blob, url, name, downloaded}
 let blobs=[];
 
 /* ── 홈 ── */
@@ -303,8 +301,10 @@ function submitChangePin(){
 
 /* ── 연습 초기화 ── */
 function initPractice(){
-  secs=0;recCount=0;blobs=[];
+  secs=0;recCount=0;blobs=[];isRecording=false;
   if(timerIv)clearInterval(timerIv);
+  if(currentStream)currentStream.getTracks().forEach(t=>t.stop());
+  currentStream=null;currentMediaRec=null;currentChunks=[];
   document.getElementById('prac-av').textContent=cur.initials;
   document.getElementById('prac-name').textContent=cur.name;
   document.getElementById('timer').textContent='00:00:00';
@@ -322,7 +322,7 @@ function initPractice(){
   document.getElementById('rec-lbl').textContent='녹음 시작';
   document.getElementById('mic-note').textContent='';
   document.getElementById('dl-warn').style.display='none';
-  practicing=false;mediaRec=null;
+  practicing=false;
 }
 
 /* ── 시작/일시정지 ── */
@@ -353,53 +353,86 @@ function togglePractice(){
   }
 }
 
-/* ── 녹음 ── */
-async function toggleRecord(){
-  const btn=document.getElementById('rec-btn');
-  if(!mediaRec||mediaRec.state==='inactive'){
-    try{
-      const stream=await navigator.mediaDevices.getUserMedia({audio:true,video:false});
-      chunks=[];
-      let mime='';
-      ['audio/webm;codecs=opus','audio/webm','audio/ogg','audio/mp4'].forEach(m=>{
-        if(!mime&&MediaRecorder.isTypeSupported(m))mime=m;
-      });
-      mediaRec=mime?new MediaRecorder(stream,{mimeType:mime}):new MediaRecorder(stream);
-      mediaRec.ondataavailable=e=>{if(e.data&&e.data.size>0)chunks.push(e.data);};
-      mediaRec.onstop=()=>{
-        const usedMime=mediaRec.mimeType||'audio/webm';
-        const blob=new Blob(chunks,{type:usedMime});
-        const url=URL.createObjectURL(blob);
-        let ext='webm';
-        if(usedMime.includes('mp4'))ext='mp4';
-        else if(usedMime.includes('ogg'))ext='ogg';
-        const today=new Date().toISOString().slice(0,10);
-        const fname=`${cur.name}_연습녹음${recCount}_${today}.${ext}`;
-        const idx=blobs.length;
-        blobs.push({blob,url,name:fname,downloaded:false,ready:true});
-        stream.getTracks().forEach(t=>t.stop());
-        addRecItem(recCount,url,fname,idx);
-        document.getElementById('mic-note').textContent='';
-      };
-      mediaRec.start(200);
-      btn.className='rec-btn recording';
-      document.getElementById('rec-lbl').textContent='녹음 중 ● (완료하려면 다시 누르기)';
-      document.getElementById('mic-note').textContent='🎙 마이크가 활성화되어 있어요';
-    }catch(e){
-      document.getElementById('mic-note').textContent='마이크 권한이 필요해요. 브라우저에서 허용해주세요.';
-    }
-  }else if(mediaRec.state==='recording'){
-    recCount++;
-    mediaRec.stop();
-    mediaRec=null;
-    btn.className='rec-btn';
-    document.getElementById('rec-lbl').textContent=recCount>=3?'녹음 완료 ✓':'녹음 시작';
-    const cnt=document.getElementById('rec-cnt');
-    cnt.textContent=`${recCount} / 3`;
-    if(recCount>=3){cnt.classList.add('done');btn.disabled=true;document.getElementById('end-btn').disabled=false;}
+/* ── 녹음 시작 ── */
+async function startRecording(){
+  try{
+    currentChunks=[];
+    currentStream=await navigator.mediaDevices.getUserMedia({audio:true,video:false});
+    let mime='';
+    const candidates=['audio/webm;codecs=opus','audio/webm','audio/ogg;codecs=opus','audio/ogg','audio/mp4'];
+    for(const m of candidates){if(MediaRecorder.isTypeSupported(m)){mime=m;break;}}
+    currentMediaRec=mime?new MediaRecorder(currentStream,{mimeType:mime}):new MediaRecorder(currentStream);
+    currentMediaRec.ondataavailable=e=>{
+      if(e.data&&e.data.size>0)currentChunks.push(e.data);
+    };
+    // onstop은 stopRecording()에서 등록
+    currentMediaRec.start(100);
+    isRecording=true;
+    document.getElementById('rec-btn').className='rec-btn recording';
+    document.getElementById('rec-lbl').textContent='녹음 중 ● (완료하려면 다시 누르기)';
+    document.getElementById('mic-note').textContent='🎙 마이크가 활성화되어 있어요';
+  }catch(e){
+    document.getElementById('mic-note').textContent='마이크 권한이 필요해요. 브라우저에서 허용해주세요.';
   }
 }
 
+/* ── 녹음 중지 ── */
+function stopRecording(){
+  if(!currentMediaRec||currentMediaRec.state==='inactive')return;
+  recCount++;
+  const numForClosure=recCount; // 클로저용 스냅샷
+  const recForClosure=currentMediaRec;
+  const chunksForClosure=currentChunks;
+  const streamForClosure=currentStream;
+
+  recForClosure.onstop=function(){
+    // 스트림 정리
+    streamForClosure.getTracks().forEach(t=>t.stop());
+    // Blob 생성
+    const usedMime=recForClosure.mimeType||'audio/webm';
+    const blob=new Blob(chunksForClosure,{type:usedMime});
+    const url=URL.createObjectURL(blob);
+    let ext='webm';
+    if(usedMime.includes('mp4'))ext='mp4';
+    else if(usedMime.includes('ogg'))ext='ogg';
+    const today=new Date().toISOString().slice(0,10);
+    const fname=`${cur.name}_연습녹음${numForClosure}_${today}.${ext}`;
+    const idx=blobs.length;
+    blobs.push({blob,url,name:fname,downloaded:false});
+    // UI 추가
+    addRecItem(numForClosure,url,fname,idx);
+    document.getElementById('mic-note').textContent='';
+  };
+
+  recForClosure.stop();
+
+  // 상태 초기화 (onstop 실행 전에 null 해도 괜찮음 — 클로저가 참조 유지)
+  currentMediaRec=null;
+  currentStream=null;
+  currentChunks=[];
+  isRecording=false;
+
+  // UI 업데이트
+  document.getElementById('rec-btn').className='rec-btn';
+  document.getElementById('rec-lbl').textContent=numForClosure>=3?'녹음 완료 ✓':'녹음 시작';
+  const cnt=document.getElementById('rec-cnt');
+  cnt.textContent=`${numForClosure} / 3`;
+  if(numForClosure>=3){
+    cnt.classList.add('done');
+    document.getElementById('rec-btn').disabled=true;
+    document.getElementById('end-btn').disabled=false;
+  }
+}
+
+function toggleRecord(){
+  if(!isRecording){
+    startRecording();
+  }else{
+    stopRecording();
+  }
+}
+
+/* ── 녹음 아이템 UI ── */
 function addRecItem(num,url,fname,idx){
   const li=document.createElement('div');li.className='rec-item';
   li.innerHTML=`
@@ -425,73 +458,41 @@ function resetPb(n){const b=document.getElementById('pb-'+n);if(b)b.textContent=
 /* ── 다운로드 ── */
 function doDownload(idx,num){
   const rec=blobs[idx];
-  if(!rec||!rec.ready){
-    alert('녹음 파일이 아직 준비되지 않았어요. 잠시 후 다시 시도해주세요.');
-    return;
-  }
-  // FileReader로 base64 변환 → <a> 클릭 (크롬/안드로이드/iOS 모두 호환)
-  const reader=new FileReader();
-  reader.onloadend=function(){
-    const a=document.createElement('a');
-    a.href=reader.result;
-    a.download=rec.name;
-    a.style.display='none';
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(()=>{document.body.removeChild(a);},1000);
-  };
-  reader.readAsDataURL(rec.blob);
-
-  // 다운로드 완료 표시
+  if(!rec){alert('파일이 아직 준비되지 않았어요. 잠시 후 다시 눌러주세요.');return;}
+  // ObjectURL 직접 사용 (크롬에서 가장 안정적)
+  const a=document.createElement('a');
+  a.href=rec.url;
+  a.download=rec.name;
+  a.style.display='none';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(()=>{
+    document.body.removeChild(a);
+  },500);
   rec.downloaded=true;
   const db=document.getElementById('db-'+num);
   if(db){db.textContent='✓ 완료';db.classList.add('dl-done');db.disabled=true;}
-
-  // 경고 숨기기 (전부 완료됐으면)
-  if(recCount===3&&blobs.length===3&&blobs.every(r=>r.downloaded)){
+  if(blobs.length===3&&blobs.every(r=>r.downloaded)){
     document.getElementById('dl-warn').style.display='none';
   }
 }
 
 /* ── 연습 종료 ── */
 function endPractice(){
-  // 녹음이 3개 완료됐는지 먼저 확인
-  if(recCount<3){
-    showWarn('녹음을 3회 완료해야 종료할 수 있어요!');
-    return;
-  }
-  // blobs가 3개 다 ready인지 확인 (onstop 아직 안 끝난 경우)
-  if(blobs.length<3||blobs.some(r=>!r.ready)){
-    showWarn('녹음 파일이 아직 처리 중이에요. 잠시 후 다시 눌러주세요.');
-    return;
-  }
-  // 다운로드 안 된 파일 확인
+  if(recCount<3){showWarn('녹음을 3회 완료해야 종료할 수 있어요!');return;}
+  if(blobs.length<3){showWarn('녹음 파일이 아직 처리 중이에요. 잠시 후 다시 눌러주세요.');return;}
   const notDl=blobs.filter(r=>!r.downloaded);
-  if(notDl.length>0){
-    showWarn(`⚠️ 녹음 파일 ${notDl.length}개를 아직 다운로드하지 않았어요.\n각 녹음의 ⬇ 다운로드 버튼을 눌러 파일을 저장해주세요!`);
-    return;
-  }
-  // 모두 완료 → 기록 저장 후 홈으로
+  if(notDl.length>0){showWarn(`⚠️ 녹음 파일 ${notDl.length}개를 아직 다운로드하지 않았어요.\n⬇ 다운로드 버튼을 눌러 저장 후 종료해주세요!`);return;}
   clearInterval(timerIv);
   const h=String(Math.floor(secs/3600)).padStart(2,'0');
   const m=String(Math.floor((secs%3600)/60)).padStart(2,'0');
   const s=String(secs%60).padStart(2,'0');
   const duration=`${h}:${m}:${s}`;
   const today=new Date().toISOString().slice(0,10);
-  if(DB.students[cur.name]){
-    DB.students[cur.name].sessions.unshift({date:today,duration,recs:recCount});
-    saveDB();
-  }
-  stack=['screen-login'];show('screen-login');
-  history.pushState({s:'screen-login'},'');
+  if(DB.students[cur.name]){DB.students[cur.name].sessions.unshift({date:today,duration,recs:recCount});saveDB();}
+  stack=['screen-login'];show('screen-login');history.pushState({s:'screen-login'},'');
 }
-
-function showWarn(msg){
-  const w=document.getElementById('dl-warn');
-  w.style.display='block';
-  w.textContent=msg;
-  w.scrollIntoView({behavior:'smooth',block:'center'});
-}
+function showWarn(msg){const w=document.getElementById('dl-warn');w.style.display='block';w.textContent=msg;w.scrollIntoView({behavior:'smooth',block:'center'});}
 
 /* ── 강사 로그인 ── */
 function onInstrPin(){document.getElementById('instr-login-btn').disabled=!document.getElementById('instr-pin').value.length;document.getElementById('instr-err').textContent='';}
